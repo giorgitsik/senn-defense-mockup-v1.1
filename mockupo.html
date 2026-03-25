@@ -1,0 +1,864 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --yellow: #F5C518;
+    --black: #0A0A0A;
+    --dark: #111111;
+    --dark2: #1A1A1A;
+    --gray-light: #888888;
+    --gray-border: rgba(255,255,255,0.08);
+    --white: #FFFFFF;
+    --off-white: #E8E6E0;
+  }
+  body { background: var(--black); color: var(--white); font-family: 'Barlow', sans-serif; font-size: 14px; }
+
+  .topbar {
+    background: var(--dark2);
+    border-bottom: 1px solid var(--gray-border);
+    padding: 6px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--gray-light);
+    text-transform: uppercase;
+  }
+  .topbar a { color: var(--yellow); text-decoration: none; }
+
+  nav {
+    background: var(--black);
+    border-bottom: 1px solid var(--gray-border);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+  }
+
+  .logo {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-style: italic;
+    color: var(--white);
+    font-style: italic !important;
+  }
+  .logo .dot { color: var(--yellow); font-style: italic; }
+
+  .nav-links {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--off-white);
+    text-decoration: none;
+    padding: 0 18px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 3px solid transparent;
+    transition: all 0.15s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--yellow); border-bottom-color: var(--yellow); }
+
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .nav-icon-btn {
+    background: transparent;
+    border: 1px solid var(--gray-border);
+    color: var(--gray-light);
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .nav-icon-btn:hover { color: var(--yellow); border-color: rgba(245,197,24,0.4); }
+  .nav-icon-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+  .cart-btn {
+    background: var(--yellow);
+    color: var(--black);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cart-count {
+    background: var(--black);
+    color: var(--yellow);
+    width: 17px; height: 17px;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .hero {
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+    min-height: 460px;
+    display: flex;
+    align-items: center;
+  }
+  .hero-stripe {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 42%;
+    background: repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(245,197,24,0.025) 40px, rgba(245,197,24,0.025) 41px);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 60px 40px;
+    max-width: 580px;
+  }
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 2px; background: var(--yellow); }
+  .hero h1 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 54px;
+    line-height: 1.0;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+  .hero h1 .accent { color: var(--yellow); }
+  .hero p {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--gray-light);
+    line-height: 1.65;
+    margin-bottom: 32px;
+    max-width: 400px;
+  }
+  .hero-ctas { display: flex; gap: 12px; }
+  .btn-primary {
+    background: var(--yellow);
+    color: var(--black);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 13px 28px;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    border: 1px solid rgba(255,255,255,0.2);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .cat-strip {
+    background: var(--dark2);
+    border-top: 1px solid var(--gray-border);
+    border-bottom: 3px solid var(--yellow);
+    display: flex;
+  }
+  .cat-item {
+    flex: 1;
+    padding: 14px 10px;
+    text-align: center;
+    border-right: 1px solid var(--gray-border);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .cat-item:hover { background: rgba(245,197,24,0.07); }
+  .cat-item.active { background: rgba(245,197,24,0.1); }
+  .cat-icon-wrap {
+    width: 22px; height: 22px;
+    margin: 0 auto 7px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gray-light);
+  }
+  .cat-item.active .cat-icon-wrap { color: var(--yellow); }
+  .cat-icon-wrap svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .cat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--off-white);
+  }
+  .cat-item.active .cat-label { color: var(--yellow); }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 32px 40px 20px;
+    border-bottom: 1px solid var(--gray-border);
+  }
+  .section-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .section-title .accent { color: var(--yellow); }
+  .section-link {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    text-decoration: none;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-left: 1px solid var(--gray-border);
+    background: var(--dark);
+  }
+  .product-card {
+    border-right: 1px solid var(--gray-border);
+    border-bottom: 1px solid var(--gray-border);
+    background: var(--dark);
+    cursor: pointer;
+    transition: background 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-card:hover { background: var(--dark2); }
+  .product-card:hover .product-overlay { opacity: 1; }
+
+  .product-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #181818;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-bottom: 1px solid var(--gray-border);
+  }
+  .product-img svg { width: 52px; height: 52px; stroke: #2e2e2e; fill: none; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+  .img-label {
+    position: absolute;
+    bottom: 8px;
+    left: 0; right: 0;
+    text-align: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #2e2e2e;
+    font-weight: 600;
+  }
+  .product-badge {
+    position: absolute;
+    top: 10px; left: 10px;
+    background: var(--yellow);
+    color: var(--black);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    z-index: 2;
+  }
+  .product-badge.gray { background: #444; color: #ccc; }
+  .product-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 3;
+  }
+  .overlay-btn {
+    width: 100%;
+    background: var(--yellow);
+    color: var(--black);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+  }
+  .product-info { padding: 13px 15px; }
+  .product-brand {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 3px;
+  }
+  .product-name { font-size: 13px; font-weight: 400; color: var(--off-white); line-height: 1.3; margin-bottom: 9px; }
+  .product-price { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 600; color: var(--white); margin-bottom: 5px; }
+  .stock-row { display: flex; align-items: center; gap: 5px; }
+  .stock-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .stock-dot.green { background: #4CAF50; }
+  .stock-dot.yellow { background: var(--yellow); }
+  .stock-dot.red { background: #E53935; }
+  .stock-text { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray-light); }
+
+  .brands-band {
+    background: var(--dark2);
+    border-top: 1px solid var(--gray-border);
+    border-bottom: 1px solid var(--gray-border);
+    padding: 22px 40px;
+  }
+  .brands-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-light); margin-bottom: 14px; }
+  .brands-row { display: flex; gap: 7px; flex-wrap: wrap; }
+  .brand-pill {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--gray-light); padding: 5px 13px; border: 1px solid var(--gray-border);
+    cursor: pointer; transition: all 0.15s; background: transparent;
+  }
+  .brand-pill:hover { color: var(--yellow); border-color: rgba(245,197,24,0.5); }
+
+  .info-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 3px solid var(--yellow);
+    background: var(--dark2);
+  }
+  .info-item { padding: 22px 26px; border-right: 1px solid var(--gray-border); display: flex; align-items: flex-start; gap: 14px; }
+  .info-icon-box { width: 32px; height: 32px; border: 1px solid rgba(245,197,24,0.25); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .info-icon-box svg { width: 15px; height: 15px; stroke: var(--yellow); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .info-text-title { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); margin-bottom: 3px; }
+  .info-text-sub { font-size: 12px; color: var(--gray-light); line-height: 1.4; }
+
+  footer { background: var(--black); border-top: 1px solid var(--gray-border); padding: 40px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 30px; }
+  .footer-tagline { font-size: 12px; color: var(--gray-light); line-height: 1.6; margin-top: 10px; }
+  .footer-col-title { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--yellow); margin-bottom: 13px; }
+  .footer-col a { display: block; font-size: 13px; color: var(--gray-light); text-decoration: none; margin-bottom: 7px; transition: color 0.15s; }
+  .footer-col a:hover { color: var(--white); }
+  .footer-bottom { border-top: 1px solid var(--gray-border); padding-top: 18px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-size: 11px; color: var(--gray-light); font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.05em; }
+  .ffl-notice { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--gray-light); text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+  .ffl-dot { width: 6px; height: 6px; background: var(--yellow); border-radius: 50%; }
+
+  /* === TEST SECTION === */
+  .test-section {
+    background: var(--dark2);
+    border-top: 3px solid var(--yellow);
+    border-bottom: 1px solid var(--gray-border);
+    padding: 60px 40px;
+  }
+  .test-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .test-pillars { display: flex; flex-direction: column; gap: 0; }
+  .test-pillar {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--gray-border);
+    display: grid;
+    grid-template-columns: 38px 1fr;
+    column-gap: 18px;
+    row-gap: 6px;
+    align-items: start;
+  }
+  .test-pillar:first-child { border-top: 1px solid var(--gray-border); }
+  .test-pillar-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--yellow);
+    letter-spacing: 0.05em;
+    line-height: 1;
+    padding-top: 2px;
+    grid-row: span 2;
+  }
+  .test-pillar-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .test-pillar-body { font-size: 13px; font-weight: 300; color: var(--gray-light); line-height: 1.6; }
+
+  /* === AUDITS SECTION === */
+  .audits-intro {
+    background: var(--dark);
+    padding: 14px 40px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--gray-light);
+    border-bottom: 1px solid var(--gray-border);
+    text-transform: uppercase;
+  }
+  .audits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-left: 1px solid var(--gray-border);
+    background: var(--dark);
+  }
+  .audit-card {
+    border-right: 1px solid var(--gray-border);
+    border-bottom: 1px solid var(--gray-border);
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+  }
+  .audit-img-wrap { position: relative; border-bottom: 1px solid var(--gray-border); }
+  .audit-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #181818;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .audit-img svg { stroke: #2e2e2e; fill: none; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+  .audit-score-badge {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: var(--yellow);
+    color: var(--black);
+    padding: 7px 10px;
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+    z-index: 2;
+  }
+  .audit-score-num { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; line-height: 1; }
+  .audit-score-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; }
+  .audit-body { padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 10px; }
+  .audit-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--yellow); }
+  .audit-name { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); line-height: 1.2; }
+  .audit-verdict { font-size: 13px; font-weight: 300; color: var(--gray-light); line-height: 1.6; font-style: italic; border-left: 2px solid rgba(245,197,24,0.35); padding-left: 11px; margin: 2px 0; }
+  .audit-metrics { display: flex; flex-direction: column; gap: 7px; margin-top: 4px; }
+  .audit-metric { display: flex; align-items: center; gap: 10px; }
+  .metric-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-light); width: 95px; flex-shrink: 0; }
+  .metric-bar { flex: 1; height: 3px; background: rgba(255,255,255,0.07); }
+  .metric-fill { height: 100%; background: var(--yellow); }
+  .audit-rounds { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-light); border-top: 1px solid var(--gray-border); padding-top: 10px; margin-top: 4px; }
+  .audit-rounds strong { color: var(--white); font-weight: 700; }
+</style>
+
+<div class="topbar">
+  <span>FFL Transfer Available &middot; Must Be 21+ To Purchase Firearms</span>
+  <span>Questions? <a href="#">Contact Us</a> &nbsp;&middot;&nbsp; <a href="#">Login / Register</a></span>
+</div>
+
+<nav>
+  <div class="logo" style="font-style:italic;font-family:'Oswald',sans-serif;font-weight:700;font-size:26px;letter-spacing:0.15em;text-transform:uppercase;color:#fff;">
+    SENN DEFENSE
+  </div>
+  <div class="nav-links">
+    <a href="#" class="active">Shop</a>
+    <a href="#">Optics</a>
+    <a href="#">Firearms</a>
+    <a href="#">Gear</a>
+    <a href="#">Accessories</a>
+    <a href="#">Brands</a>
+    <a href="#">Audits</a>
+    <a href="#">About</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-icon-btn">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    <div class="nav-icon-btn">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <button class="cart-btn">Cart <div class="cart-count">3</div></button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-stripe"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Professional Grade Equipment</div>
+    <h1>Built For<br><span class="accent">Those</span><br>Who Answer</h1>
+    <p>Premium gear, optics, and firearms accessories from the brands trusted by professionals. No compromises.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary">Shop All Products</button>
+      <button class="btn-outline">View New Arrivals</button>
+    </div>
+  </div>
+</div>
+
+<div class="cat-strip">
+  <div class="cat-item active">
+    <div class="cat-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg></div>
+    <div class="cat-label">Optics</div>
+  </div>
+  <div class="cat-item">
+    <div class="cat-icon-wrap"><svg viewBox="0 0 24 24"><rect x="2" y="9" width="16" height="6" rx="1"/><path d="M18 11h2a2 2 0 0 1 2 2v0a2 2 0 0 1-2 2h-2"/><line x1="6" y1="9" x2="6" y2="6"/></svg></div>
+    <div class="cat-label">Firearms</div>
+  </div>
+  <div class="cat-item">
+    <div class="cat-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+    <div class="cat-label">Body Armor</div>
+  </div>
+  <div class="cat-item">
+    <div class="cat-icon-wrap"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+    <div class="cat-label">Carriers</div>
+  </div>
+  <div class="cat-item">
+    <div class="cat-icon-wrap"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+    <div class="cat-label">Lights</div>
+  </div>
+  <div class="cat-item">
+    <div class="cat-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div>
+    <div class="cat-label">Triggers</div>
+  </div>
+  <div class="cat-item">
+    <div class="cat-icon-wrap"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div>
+    <div class="cat-label">Belts / Holsters</div>
+  </div>
+  <div class="cat-item">
+    <div class="cat-icon-wrap"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+    <div class="cat-label">Magazines</div>
+  </div>
+</div>
+
+<div class="section-header">
+  <div class="section-title">Featured <span class="accent">Products</span></div>
+  <a href="#" class="section-link">View All &rarr;</a>
+</div>
+
+<div class="product-grid">
+  <div class="product-card">
+    <div class="product-img">
+      <svg viewBox="0 0 80 60"><rect x="10" y="18" width="60" height="24" rx="3"/><rect x="30" y="12" width="20" height="6" rx="1"/><circle cx="40" cy="30" r="8"/><circle cx="40" cy="30" r="3"/></svg>
+      <div class="img-label">Product Image</div>
+      <div class="product-badge">NEW</div>
+    </div>
+    <div class="product-overlay"><div class="overlay-btn">Quick View</div></div>
+    <div class="product-info">
+      <div class="product-brand">Trijicon</div>
+      <div class="product-name">RMR HD 3.25 MOA RDS — Black</div>
+      <div class="product-price">$699.00</div>
+      <div class="stock-row"><div class="stock-dot green"></div><div class="stock-text">In Stock</div></div>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <div class="product-img">
+      <svg viewBox="0 0 80 60"><rect x="5" y="22" width="55" height="16" rx="2"/><rect x="60" y="24" width="12" height="5" rx="1"/><rect x="18" y="18" width="8" height="22" rx="1"/><circle cx="25" cy="38" r="4"/><circle cx="50" cy="38" r="4"/></svg>
+      <div class="img-label">Product Image</div>
+    </div>
+    <div class="product-overlay"><div class="overlay-btn">Quick View</div></div>
+    <div class="product-info">
+      <div class="product-brand">LMT</div>
+      <div class="product-name">MRP-L 13.5" Upper Receiver Assembly</div>
+      <div class="product-price">$1,249.00</div>
+      <div class="stock-row"><div class="stock-dot green"></div><div class="stock-text">In Stock</div></div>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <div class="product-img">
+      <svg viewBox="0 0 80 60"><rect x="15" y="22" width="40" height="16" rx="8"/><rect x="8" y="26" width="10" height="8" rx="2"/><circle cx="55" cy="30" r="5"/><line x1="55" y1="18" x2="55" y2="22"/></svg>
+      <div class="img-label">Product Image</div>
+      <div class="product-badge gray">FDE</div>
+    </div>
+    <div class="product-overlay"><div class="overlay-btn">Quick View</div></div>
+    <div class="product-info">
+      <div class="product-brand">Surefire</div>
+      <div class="product-name">M640 Turbo Scout Light Pro — FDE</div>
+      <div class="product-price">$389.00</div>
+      <div class="stock-row"><div class="stock-dot yellow"></div><div class="stock-text">Low Stock</div></div>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <div class="product-img">
+      <svg viewBox="0 0 80 60"><rect x="15" y="15" width="50" height="30" rx="3"/><line x1="25" y1="15" x2="25" y2="45"/><line x1="55" y1="15" x2="55" y2="45"/><line x1="15" y1="30" x2="65" y2="30"/></svg>
+      <div class="img-label">Product Image</div>
+    </div>
+    <div class="product-overlay"><div class="overlay-btn">Quick View</div></div>
+    <div class="product-info">
+      <div class="product-brand">Hesco</div>
+      <div class="product-name">4601 Level IV Plate Set</div>
+      <div class="product-price">$474.00</div>
+      <div class="stock-row"><div class="stock-dot green"></div><div class="stock-text">In Stock</div></div>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <div class="product-img">
+      <svg viewBox="0 0 80 60"><path d="M20 15 h40 l5 10 v20 h-50 v-20 z"/><rect x="28" y="25" width="10" height="15" rx="1"/><rect x="42" y="25" width="10" height="15" rx="1"/><line x1="20" y1="25" x2="60" y2="25"/></svg>
+      <div class="img-label">Product Image</div>
+    </div>
+    <div class="product-overlay"><div class="overlay-btn">Quick View</div></div>
+    <div class="product-info">
+      <div class="product-brand">Crye Precision</div>
+      <div class="product-name">JPC 2.0 Jumpable Plate Carrier</div>
+      <div class="product-price">$310.00</div>
+      <div class="stock-row"><div class="stock-dot green"></div><div class="stock-text">In Stock</div></div>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <div class="product-img">
+      <svg viewBox="0 0 80 60"><rect x="20" y="20" width="40" height="20" rx="3"/><path d="M32 20 v-8 h16 v8"/><circle cx="30" cy="30" r="4"/><circle cx="50" cy="30" r="4"/><line x1="34" y1="30" x2="46" y2="30"/></svg>
+      <div class="img-label">Product Image</div>
+    </div>
+    <div class="product-overlay"><div class="overlay-btn">Quick View</div></div>
+    <div class="product-info">
+      <div class="product-brand">Geissele</div>
+      <div class="product-name">SSA-X Super Select-Fire Trigger</div>
+      <div class="product-price">$299.00</div>
+      <div class="stock-row"><div class="stock-dot green"></div><div class="stock-text">In Stock</div></div>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <div class="product-img">
+      <svg viewBox="0 0 80 60"><circle cx="40" cy="30" r="16"/><circle cx="40" cy="30" r="10"/><circle cx="40" cy="30" r="3"/><line x1="40" y1="14" x2="40" y2="18"/><line x1="40" y1="42" x2="40" y2="46"/><line x1="24" y1="30" x2="28" y2="30"/><line x1="52" y1="30" x2="56" y2="30"/></svg>
+      <div class="img-label">Product Image</div>
+      <div class="product-badge">POPULAR</div>
+    </div>
+    <div class="product-overlay"><div class="overlay-btn">Quick View</div></div>
+    <div class="product-info">
+      <div class="product-brand">Aimpoint</div>
+      <div class="product-name">Micro T-2 Red Dot — Black</div>
+      <div class="product-price">$899.00</div>
+      <div class="stock-row"><div class="stock-dot green"></div><div class="stock-text">In Stock</div></div>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <div class="product-img">
+      <svg viewBox="0 0 80 60"><rect x="22" y="18" width="28" height="30" rx="2"/><rect x="18" y="22" width="8" height="10" rx="1"/><path d="M50 28 h8 a4 4 0 0 1 0 8 h-8"/><line x1="30" y1="18" x2="30" y2="48"/></svg>
+      <div class="img-label">Product Image</div>
+    </div>
+    <div class="product-overlay"><div class="overlay-btn">Quick View</div></div>
+    <div class="product-info">
+      <div class="product-brand">Safariland</div>
+      <div class="product-name">6354RDS ALS Holster W/ QLS Fork</div>
+      <div class="product-price">$189.00</div>
+      <div class="stock-row"><div class="stock-dot red"></div><div class="stock-text">Out of Stock</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="brands-band">
+  <div class="brands-label">Brands We Carry</div>
+  <div class="brands-row">
+    <div class="brand-pill">LMT</div><div class="brand-pill">Trijicon</div><div class="brand-pill">Aimpoint</div>
+    <div class="brand-pill">EoTech</div><div class="brand-pill">Surefire</div><div class="brand-pill">Geissele</div>
+    <div class="brand-pill">Crye Precision</div><div class="brand-pill">Ferro Concepts</div><div class="brand-pill">Hesco</div>
+    <div class="brand-pill">Safariland</div><div class="brand-pill">Glock</div><div class="brand-pill">Modlite</div>
+    <div class="brand-pill">Unity Tactical</div><div class="brand-pill">B5 Systems</div><div class="brand-pill">ADM</div>
+    <div class="brand-pill">Blue Force Gear</div><div class="brand-pill">Peltor</div><div class="brand-pill">Magpul</div>
+  </div>
+</div>
+
+<!-- WE TEST EVERYTHING SECTION -->
+<div class="test-section">
+  <div class="test-inner">
+    <div class="test-left">
+      <div class="hero-eyebrow" style="margin-bottom:14px;">How We Operate</div>
+      <h2 style="font-family:'Oswald',sans-serif;font-weight:700;font-size:42px;line-height:1.0;letter-spacing:0.02em;text-transform:uppercase;color:var(--white);margin-bottom:18px;">
+        We Don't List<br><span style="color:var(--yellow);">What We</span><br>Don't Trust
+      </h2>
+      <p style="font-size:15px;font-weight:300;color:var(--gray-light);line-height:1.7;max-width:420px;">Every product on this site has been through our hands. We take this seriously enough to hold gear to the same standard as the professionals who depend on it. The same brands trusted by law enforcement and military end users. If it's here, it earned its place.</p>
+    </div>
+    <div class="test-pillars">
+      <div class="test-pillar">
+        <div class="test-pillar-num">01</div>
+        <div class="test-pillar-title">We Use It</div>
+        <div class="test-pillar-body">We run every product hard — on the range, in training, and in every scenario we can put it through. We know what it feels like when it works and when it doesn't.</div>
+      </div>
+      <div class="test-pillar">
+        <div class="test-pillar-num">02</div>
+        <div class="test-pillar-title">We Trust It</div>
+        <div class="test-pillar-body">We only list gear we'd put on our own kit. If we wouldn't bet on it ourselves, it doesn't get a product page.</div>
+      </div>
+      <div class="test-pillar">
+        <div class="test-pillar-num">03</div>
+        <div class="test-pillar-title">We Torture It</div>
+        <div class="test-pillar-body">Drop tests. Extreme temps. Round counts. Salt and grime. We push gear past the point where most people would quit to find out what actually breaks — and what doesn't.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AUDITS SECTION -->
+<div class="section-header" style="background:var(--dark);">
+  <div class="section-title">Senn <span class="accent">Audits</span></div>
+  <a href="#" class="section-link">All Audits &rarr;</a>
+</div>
+<div class="audits-intro">
+  We score. We photograph. We give our honest take — with numbers where they matter. No sponsored opinions.
+</div>
+<div class="audits-grid">
+
+  <div class="audit-card">
+    <div class="audit-img-wrap">
+      <div class="audit-img">
+        <svg viewBox="0 0 120 80" width="120" height="80"><rect x="20" y="20" width="80" height="40" rx="4"/><rect x="44" y="14" width="32" height="6" rx="1"/><circle cx="60" cy="40" r="12"/><circle cx="60" cy="40" r="5"/></svg>
+        <div class="img-label">Product Photo</div>
+      </div>
+      <div class="audit-score-badge">
+        <div class="audit-score-num">9.1</div>
+        <div class="audit-score-label">/ 10</div>
+      </div>
+    </div>
+    <div class="audit-body">
+      <div class="audit-tag">Optics</div>
+      <div class="audit-name">Trijicon RMR HD 3.25 MOA</div>
+      <div class="audit-verdict">"The clearest, most durable micro dot we've run. Held zero through 1,200 rounds and a drop off a tailgate. The HD glass is a real upgrade over the original."</div>
+      <div class="audit-metrics">
+        <div class="audit-metric"><span class="metric-label">Clarity</span><div class="metric-bar"><div class="metric-fill" style="width:95%"></div></div></div>
+        <div class="audit-metric"><span class="metric-label">Durability</span><div class="metric-bar"><div class="metric-fill" style="width:90%"></div></div></div>
+        <div class="audit-metric"><span class="metric-label">Value</span><div class="metric-bar"><div class="metric-fill" style="width:82%"></div></div></div>
+      </div>
+      <div class="audit-rounds">Rounds Tested: <strong>1,200+</strong></div>
+    </div>
+  </div>
+
+  <div class="audit-card">
+    <div class="audit-img-wrap">
+      <div class="audit-img">
+        <svg viewBox="0 0 120 80" width="120" height="80"><rect x="15" y="25" width="70" height="30" rx="2"/><path d="M20 25 v-10 h24 v10"/><circle cx="28" cy="44" r="6"/><circle cx="72" cy="44" r="6"/><line x1="34" y1="40" x2="65" y2="40"/><rect x="85" y="28" width="18" height="6" rx="1"/></svg>
+        <div class="img-label">Product Photo</div>
+      </div>
+      <div class="audit-score-badge">
+        <div class="audit-score-num">9.4</div>
+        <div class="audit-score-label">/ 10</div>
+      </div>
+    </div>
+    <div class="audit-body">
+      <div class="audit-tag">Firearms</div>
+      <div class="audit-name">LMT MRP-L 13.5" Upper</div>
+      <div class="audit-verdict">"Ran 3,000 rounds with zero malfunctions across three different lowers. The monolithic upper is the real deal — no wobble, no variance. This is what mil-spec should mean."</div>
+      <div class="audit-metrics">
+        <div class="audit-metric"><span class="metric-label">Reliability</span><div class="metric-bar"><div class="metric-fill" style="width:98%"></div></div></div>
+        <div class="audit-metric"><span class="metric-label">Accuracy</span><div class="metric-bar"><div class="metric-fill" style="width:93%"></div></div></div>
+        <div class="audit-metric"><span class="metric-label">Build Quality</span><div class="metric-bar"><div class="metric-fill" style="width:96%"></div></div></div>
+      </div>
+      <div class="audit-rounds">Rounds Tested: <strong>3,000+</strong></div>
+    </div>
+  </div>
+
+  <div class="audit-card">
+    <div class="audit-img-wrap">
+      <div class="audit-img">
+        <svg viewBox="0 0 120 80" width="120" height="80"><rect x="25" y="22" width="50" height="36" rx="4"/><rect x="22" y="28" width="8" height="12" rx="2"/><path d="M75 34 h12 a6 6 0 0 1 0 12 h-12"/><line x1="38" y1="22" x2="38" y2="58"/></svg>
+        <div class="img-label">Product Photo</div>
+      </div>
+      <div class="audit-score-badge">
+        <div class="audit-score-num">8.7</div>
+        <div class="audit-score-label">/ 10</div>
+      </div>
+    </div>
+    <div class="audit-body">
+      <div class="audit-tag">Lights</div>
+      <div class="audit-name">Surefire M640 Turbo Scout — FDE</div>
+      <div class="audit-verdict">"1,500 lumens that actually holds up. Took sustained shooting through hot barrels and never flickered. Mount stayed locked. Water submersion test passed clean."</div>
+      <div class="audit-metrics">
+        <div class="audit-metric"><span class="metric-label">Output</span><div class="metric-bar"><div class="metric-fill" style="width:88%"></div></div></div>
+        <div class="audit-metric"><span class="metric-label">Mount Stability</span><div class="metric-bar"><div class="metric-fill" style="width:91%"></div></div></div>
+        <div class="audit-metric"><span class="metric-label">Runtime</span><div class="metric-bar"><div class="metric-fill" style="width:79%"></div></div></div>
+      </div>
+      <div class="audit-rounds">Hours Tested: <strong>80+</strong></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="info-strip">
+  <div class="info-item">
+    <div class="info-icon-box"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8L2 7"/><path d="M22 7l-6-4"/></svg></div>
+    <div><div class="info-text-title">Fast Shipping</div><div class="info-text-sub">In-stock orders ship within 1&ndash;2 business days</div></div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon-box"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+    <div><div class="info-text-title">Secure Checkout</div><div class="info-text-sub">MFA-protected accounts &amp; encrypted transactions</div></div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon-box"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+    <div><div class="info-text-title">FFL Transfers</div><div class="info-text-sub">Compliant transfers &amp; licensed firearm sales</div></div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon-box"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+    <div><div class="info-text-title">Expert Support</div><div class="info-text-sub">Talk to someone who actually uses this gear</div></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div style="font-family:'Oswald',sans-serif;font-weight:700;font-size:22px;letter-spacing:0.15em;text-transform:uppercase;font-style:italic;color:#fff;">
+        SENN DEFENSE
+      </div>
+      <div class="footer-tagline">Premium gear, optics, and accessories from the brands trusted by those who serve. FFL licensed retailer.</div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Shop</div>
+      <a href="#">Optics</a><a href="#">Firearms</a><a href="#">Body Armor</a><a href="#">Lights</a><a href="#">Triggers</a><a href="#">Magazines</a><a href="#">Audits</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Account</div>
+      <a href="#">Login</a><a href="#">Register</a><a href="#">Order History</a><a href="#">Wishlist</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Info</div>
+      <a href="#">About Us</a><a href="#">FFL Info</a><a href="#">Shipping Policy</a><a href="#">Returns</a><a href="#">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2025 Senn Defense — All rights reserved.</div>
+    <div class="ffl-notice"><div class="ffl-dot"></div>FFL Licensed &middot; 21+ Required For Firearm Purchases</div>
+  </div>
+</footer>
